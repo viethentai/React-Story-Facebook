@@ -1,0 +1,139 @@
+/* ======================= */
+/* Scrollbar chỉ áp dụng cho popup emoji */
+.react-container .emoji-group::-webkit-scrollbar {
+    width: 10px;
+}
+
+.react-container .emoji-group::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.react-container .emoji-group::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.react-container .emoji-group::-webkit-scrollbar-thumb:hover {
+    background: #888;
+    transform: scaleX(1.2);
+}
+
+.react-container .emoji-group::-webkit-scrollbar-track:hover {
+    background: #e0e0e0;
+}
+
+/* ======================= */
+/* Container chính */
+.react-container {
+    position: relative;
+}
+
+/* Animation chạy từ dưới lên cho nút React */
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================= */
+/* Nút React extension - chữ "More" với hiệu ứng pop khi hover */
+.react-container .btn-react {
+    position: absolute;
+    bottom: 5px;
+    left: 1px;
+    height: 38px;
+    width: 38px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease-out, background-color 0.2s ease;
+    animation: slideUp 0.5s ease-out forwards; /* Chỉ chạy khi xuất hiện */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Keyframes hiệu ứng nhún pop khi hover */
+@keyframes popHover {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+/* Khi hover, bật animation pop */
+.react-container .btn-react:hover {
+    animation: popHover 0.2s forwards;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    background-color: #ffffff;
+}
+
+/* ======================= */
+/* Popup emoji */
+.react-container .emoji-group {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 260px;
+    height: 220px;
+    padding: 15px;
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.react-container .emoji-group--show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* ======================= */
+/* Emoji riêng lẻ */
+.react-container .emoji {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.2s, transform 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.react-container .emoji:hover {
+    background-color: #ff8080;
+    transform: scale(1.2);
+}
