@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 300px; font-family: sans-serif; padding: 10px; }
+    .tabs { display: flex; border-bottom: 1px solid #ccc; margin-bottom: 10px; }
+    .tab { flex: 1; padding: 8px; cursor: pointer; text-align: center; background: #f0f0f0; border: none; }
+    .tab.active { background: #fff; border-bottom: 2px solid #1877f2; font-weight: bold; }
+    .content { display: none; }
+    .content.active { display: block; }
+    
+    /* Emoji Grid */
+    #emoji-grid { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+    .emoji-btn { font-size: 20px; width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd; background: white; border-radius: 5px; }
+    .emoji-btn:hover { background: #e4e6eb; }
+
+    /* Settings Switch */
+    .setting-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+    .toggle { position: relative; display: inline-block; width: 40px; height: 20px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+    .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: #2196F3; }
+    input:checked + .slider:before { transform: translateX(20px); }
+  </style>
+</head>
+<body>
+
+  <div class="tabs">
+    <button class="tab active" data-target="tab-remote">Điều khiển</button>
+    <button class="tab" data-target="tab-settings">Cài đặt</button>
+  </div>
+
+  <div id="tab-remote" class="content active">
+    <div id="emoji-grid">Đang tải...</div>
+    <p style="font-size: 11px; color: gray; text-align: center; margin-top:5px;">Click để thả tim ngay</p>
+  </div>
+
+  <div id="tab-settings" class="content">
+    <div class="setting-row">
+      <span>Hiện nút tròn trên Facebook</span>
+      <label class="toggle">
+        <input type="checkbox" id="toggle-ui">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <p style="font-size: 11px; color: red;">Cần refresh trang Facebook để áp dụng.</p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,31 +1,7 @@
 /* ======================= */
 /* Scrollbar chỉ áp dụng cho popup emoji */
 .react-container .emoji-group::-webkit-scrollbar {
-    width: 10px;
-}
-
-.react-container .emoji-group::-webkit-scrollbar-track {
-    background: #f0f0f0; 
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    transition: background 0.3s ease;
-}
-
-.react-container .emoji-group::-webkit-scrollbar-thumb {
-    background: #c0c0c0;
-    border-radius: 10px;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.react-container .emoji-group::-webkit-scrollbar-thumb:hover {
-    background: #888;
-    transform: scaleX(1.2);
-}
-
-.react-container .emoji-group::-webkit-scrollbar-track:hover {
-    background: #e0e0e0;
+    width: 0px;
 }
 
 /* ======================= */
@@ -34,20 +10,8 @@
     position: relative;
 }
 
-/* Animation chạy từ dưới lên cho nút React */
-@keyframes slideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* ======================= */
-/* Nút React extension - chữ "More" với hiệu ứng pop khi hover */
+/* Nút React "MORE" */
 .react-container .btn-react {
     position: absolute;
     bottom: 5px;
@@ -61,25 +25,112 @@
     border-radius: 100%;
     font-weight: bold;
     cursor: pointer;
-    transition: box-shadow 0.25s ease-out, background-color 0.2s ease;
-    animation: slideUp 0.5s ease-out forwards; /* Chỉ chạy khi xuất hiện */
+    transition: transform 0.2s ease-in-out;
+    animation: slideUp 0.5s ease-out forwards;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
-/* Keyframes hiệu ứng nhún pop khi hover */
-@keyframes popHover {
+.react-container .btn-react:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    transition-delay: 50ms;
+    pointer-events: auto;
+}
+
+/* Hiệu ứng nút More trượt lên */
+.btn-react.slide-in {
+    animation: slideInFromBottom 0.6s ease-out forwards;
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(35px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ======================= */
+/* Nút thay nền & reset nền */
+.react-container .btn-bg,
+.react-container .btn-reset {
+    position: absolute;
+    bottom: 5px;
+    height: 38px;
+    width: 38px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    border: none;
+    transform: translateX(0) scale(0);
+    opacity: 0;
+    transition: transform 280ms cubic-bezier(.2,.9,.2,1), opacity 200ms;
+    pointer-events: none;
+    user-select: none;
+}
+
+.btn-bg:disabled,
+.btn-reset:disabled,
+.emoji-group:disabled,
+.emoji:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.react-container .btn-bg { left: 1px; }
+.react-container .btn-reset { left: 1px; }
+
+.react-container.react-container--expanded .btn-bg {
+    transform: translateX(43px) scale(1);
+    opacity: 1;
+    transition-delay: 50ms;
+    pointer-events: auto;
+}
+
+.react-container.react-container--expanded .btn-reset {
+    transform: translateX(86px) scale(1);
+    opacity: 1;
+    transition-delay: 50ms;
+    pointer-events: auto;
+}
+
+.react-container.react-container--expanded .btn-bg:hover {
+    transform: translateX(43px) scale(1.2);   /* giữ vị trí dịch + phóng to */
+    opacity: 1;
+    transition-delay: 50ms;
+    pointer-events: auto;
+}
+
+.react-container.react-container--expanded .btn-reset:hover {
+    transform: translateX(86px) scale(1.2);   /* giữ vị trí dịch + phóng to */
+    opacity: 1;
+    transition-delay: 50ms;
+    pointer-events: auto;
+}
+
+.react-container .btn-icon {
+    display: flex;            
+    justify-content: center;  
+    align-items: center;      
+    width: 100%;              
+    height: 100%;             
+    font-size: 17px;          /* kích thước icon */
+    line-height: 1;           
+    pointer-events: none;     
+}
+
+@keyframes buttonHover   {
     0% { transform: scale(1); }
     100% { transform: scale(1.2); }
-}
-
-/* Khi hover, bật animation pop */
-.react-container .btn-react:hover {
-    animation: popHover 0.2s forwards;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    background-color: #ffffff;
 }
 
 /* ======================= */
@@ -88,8 +139,8 @@
     position: absolute;
     bottom: 70px;
     right: 0;
-    width: 260px;
-    height: 220px;
+    width: 320px;
+    height: 320px;
     padding: 15px;
     list-style: none;
     margin: 0;
@@ -97,26 +148,34 @@
     flex-flow: row wrap;
     justify-content: space-between;
     overflow-y: auto;
-    background-color: #ffffff;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    backdrop-filter: blur(8px);              /* nền mờ */
+    background-color: rgba(255, 255, 255, .75); /* nền trắng mờ */
+    border-radius: 18px;                    /* bo tròn mềm hơn */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18); /* bóng đổ đẹp hơn */
     opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0) translate(22px, 22px);
+    transform-origin: bottom right;
+    transition:
+        opacity 0.25s ease-out,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
     pointer-events: none;
+    user-select: none; /*chặn bôi đen
+
+    /* Hỗ trợ nền tùy chỉnh */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .react-container .emoji-group--show {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1) translate(0, 0);
     pointer-events: auto;
 }
 
 /* ======================= */
-/* Emoji riêng lẻ */
+/* Emoji */
 .react-container .emoji {
     height: 50px;
     width: 50px;
@@ -126,14 +185,74 @@
     font-size: 28px;
     cursor: pointer;
     border-radius: 10px;
-    transition: background-color 0.2s, transform 0.2s;
+    transition:
+        transform .18s ease-out,
+        background-color .18s ease-out,
+        box-shadow .18s ease-out;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+}
+
+.react-container .emoji {
+    transition: transform .18s, background-color .18s, box-shadow .18s;
 }
 
 .react-container .emoji:hover {
-    background-color: #ff8080;
-    transform: scale(1.2);
+    background-color: rgba(255, 100, 100, 0.25);
+    transform: translateZ(0) scale(1.22);
+    box-shadow: 0 4px 12px rgba(255, 80, 80, 0.35);
+    animation: bounceEmoji .25s ease-out;
+}
+
+@keyframes bounceEmoji {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+    100% { transform: scale(1.28); }
+}
+
+/* ===================== */
+/* DARK MODE cho extension */
+/* ===================== */
+@media (prefers-color-scheme: dark) {
+    .react-container .btn-react,
+    .react-container .btn-bg,
+    .react-container .btn-reset {
+        background-color: #2e2e2e;
+        color: #ffffff;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    .react-container .emoji-group {
+        background-color: rgba(40, 40, 40, 0.85);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        backdrop-filter: blur(10px);
+    }
+
+    .react-container .emoji:hover {
+        background-color: rgba(255, 100, 100, 0.25);
+        box-shadow: 0 4px 12px rgba(255, 80, 80, 0.35);
+    }
+}
+
+/* ===================== */
+/* DARK MODE theo Facebook */
+/* ===================== */
+html[class*="dark"] .react-container .btn-react,
+html[class*="dark"] .react-container .btn-bg,
+html[class*="dark"] .react-container .btn-reset {
+    background-color: #2e2e2e;
+    color: #ffffff;
+}
+
+html[class*="dark"] .react-container .emoji-group {
+    background-color: rgba(40, 40, 40, 0.9);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+html[class*="dark"] .react-container .emoji {
+    color: white;
+}
+
+.react-container .emoji,
+.react-container .btn-react {
+    will-change: transform;
 }

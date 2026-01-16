@@ -740,6 +740,11 @@
     "value": "🕳️"
   },
   {
+    "url": "https://emojiterra.com/",
+    "image_url": "https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/svg/1f517.svg",
+    "value": "🔗"
+  },
+  {
     "url": "https://emojipedia.org/bomb/",
     "image_url": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/apple/285/bomb_1f4a3.png",
     "value": "💣"

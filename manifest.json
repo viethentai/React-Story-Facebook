@@ -1,16 +1,26 @@
 {
   "manifest_version": 3,
-  "name": "React Story Facebook by Việt Hentai(Beta)",
-  "description": "Thả/thêm biểu cảm theo ý muốn của bạn",
-  "version": "9.1",
-  "background": {
-    "service_worker": "background.js"
+  "name": "React Story Facebook (Hybrid)",
+  "description": "Thả biểu cảm theo ý muốn của bạn",
+  "version": "6.3.0",
+  
+   "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
   },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icon/icon16.png", "48": "icon/icon48.png", "128": "icon/icon128.png" }
+  },
+  "permissions": ["activeTab", "scripting", "storage"], 
+  "host_permissions": ["https://www.facebook.com/*"],
   "content_scripts": [
     {
       "matches": ["https://www.facebook.com/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"]
+      "css": ["styles.css"],
+      "js": ["story.js"]
     }
   ],
   "web_accessible_resources": [
@@ -19,6 +29,7 @@
       "matches": ["https://www.facebook.com/*"]
     }
   ],
-  "permissions": ["tabs", "scripting"],
-  "host_permissions": ["https://www.facebook.com/*"]
+  "background": {
+    "service_worker": "background.js"
+  }
 }
