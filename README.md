@@ -2,8 +2,7 @@
 Remake version from whoant source code: https://github.com/whoant/react-story-facebook
 ## Installation
 
-Navigate to **chrome://extensions/** and click the "Load unpacked extension..." button. Navigate to and select this
-directory and reload Facebook tab.
+Download and extract the extension. Navigate to **chrome://extensions/** and turn on developer mode. Click on 'unpacked extension' and then select the path containing the previously unpacked extension. Reload Facebook and go to the Story page. 
 
 ## Screenshot
 
