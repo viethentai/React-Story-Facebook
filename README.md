@@ -1,4 +1,4 @@
-# React-Story-Facebook
+# React-Story-Facebook-Extension
 An extension that allows users to add other emojis instead of the default Facebook emojis to their Stories. Remake version from whoant source code: https://github.com/whoant/react-story-facebook
 ## Installation
 
